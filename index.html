@@ -1,0 +1,261 @@
+<!doctype html>
+
+<html>
+
+<!--<head>
+
+    <title>My Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+	<script src="js/jquery-1.12.0.js"></script>
+	<script src="js/jquery.mobile-1.4.5.js"></script>
+
+</head>
+-->
+
+<head>
+
+<!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Include jQuery Mobile stylesheets -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+<!-- Include the jQuery library -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include the jQuery Mobile library -->
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head> 
+
+<body>
+    <div data-role="page" >
+        <div data-role="header">
+            <h1>D-3235 Weight & Balance</h1>
+			
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+            <p>Datenbasis 02.16</p>
+			
+		<form>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+        <legend><b>Pilot:</b></legend>
+		
+		Vorwahl:<br>
+		
+        <input name="PilotChoice" id="PilotChoice-Brezn" type="radio"  value="off" onChange="setPilotWeight('Brezn');">
+        <label for="PilotChoice-Brezn">Brezn</label>
+        <input name="PilotChoice" id="PilotChoice-Hacke" type="radio" value="off" onChange="setPilotWeight('Hacke');">
+        <label for="PilotChoice-Hacke">Hacke</label>
+        <input name="PilotChoice" id="PilotChoice-Hulk" type="radio" value="off" onChange="setPilotWeight('Hulk');">
+        <label for="PilotChoice-Hulk">Hulk</label>
+		<input name="PilotChoice" id="PilotChoice-Ulle" type="radio" value="off" onChange="setPilotWeight('Ulle');">
+        <label for="PilotChoice-Ulle">Ulle</label>
+		<br>
+		</fieldset>
+		</form>
+		
+		
+		<form>
+		<label for="PilotWeight">Pilotengewicht inkl. Ausruestung:</label>
+		<input type="range" name="PilotWeight" id="PilotWeight" value="50" min="50" max="115" data-highlight="true" onChange="computeWB();">
+		<br>
+		</form>
+		
+		
+		
+		
+		
+		<form>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+        <legend><b>Trimmgewichte:</b></legend>
+        <input name="Batterieblei" id="Batterieblei" type="checkbox" onChange="computeWB();">
+        <label for="Batterieblei">Batterieblei</label>
+        <input name="Nasenblei_1" id="Nasenblei_1" type="checkbox" onChange="computeWB();">
+        <label for="Nasenblei_1">Nasenblei #1</label>
+		<input name="Nasenblei_2" id="Nasenblei_2" type="checkbox" onChange="computeWB();">
+        <label for="Nasenblei_2">Nasenblei #2</label>
+		<input name="Nasenblei_3" id="Nasenblei_3" type="checkbox" onChange="computeWB();">
+        <label for="Nasenblei_3">Nasenblei #3</label>
+		<input name="Nasenblei_4" id="Nasenblei_4" type="checkbox" onChange="computeWB();">
+        <label for="Nasenblei_4">Nasenblei #4</label>
+		<input name="Sauerstoff" id="Sauerstoff" type="checkbox" onChange="computeWB();">
+        <label for="Sauerstoff">Sauerstoff</label>
+
+		</fieldset>
+		<br>
+		</form>
+
+		
+		
+
+		
+		<form>
+		<fieldset data-role="controlgroup" data-type="vertical">
+
+		<legend><b>Wasserballast</b></legend>
+
+		<form>
+		Aussenfluegel:
+		<input type="range" name="OutBoard" id="OutBoard" value="0" min="0" max="115" data-highlight="true" onChange="computeWB();">
+		</form>
+		<form>
+		Innenfluegel:
+		<input type="range" name="InBoard" id="InBoard" value="0" min="0" max="157" data-highlight="true" onChange="computeWB();">
+		</form>
+		</fieldset>
+		</form>
+
+		<form>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		
+		<legend><b>Ergebniss</b></legend>
+		<table >
+		<tr>
+	
+	    <td "padding:15px 35px"></td><td "padding:15px 35px">Start</td><td "padding:15px 35px">Landung</td>
+
+		</tr>
+		<tr>
+		
+
+		<td style="padding:15px 35px">Schwerpunkt</td><td style="padding:15px 35px">  <div id='SP_TO'>   </div>    </td><td style="padding:15px 35px">   <div id='SP_LDG'>  </div>  </td>
+
+		</tr>
+		
+		<tr>
+
+
+		<td style="padding:15px 35px">Masse</td><td style="padding:15px 35px">   <div id='M_TO'>   </div> </td><td style="padding:15px 35px">   <div id='M_LDG'>   </div> </td>
+
+		</tr>
+		
+		<tr>
+
+
+		<td style="padding:15px 35px">WingLoad</td><td style="padding:15px 35px">   <div id='WL_TO'>  </div>  </td><td style="padding:15px 35px">   <div id='WL_LDG'>   </div> </td>
+
+		</tr>
+		
+		
+		
+		</table>
+		</fieldset>
+		</form>
+
+
+        </div><!-- /content -->
+
+        <div data-role="footer">
+            
+        </div><!-- /footer -->
+
+    </div><!-- /page -->
+</body>
+</html>
+
+<script type="text/javascript">
+
+var Components = {
+    names: 	['EmptyPlane', 	'PilotWeight',	'InBoard',	'OutBoard', 'Batterieblei', 'Nasenblei_1',	'Nasenblei_2',	'Nasenblei_3', 	'Nasenblei_4', 	'Sauerstoff'],
+    lever: 	[586., 			-1000.,			50.,		50.,		-1500.,			-1800.,			-1800.,			-1800.,			-1800.,			1500.],
+	mass:  	[430.,			'VAR',			'VAR',		'VAR',		0.5,			1.5,			1.5,			1.5,			1.5,			1.5],
+	active:	[1,				1,				1,			1,			'VAR',			'VAR',			'VAR',			'VAR',			'VAR',			'VAR'],
+	LDG:	[1,				1,				0,			0,			1,				1,				1,				1,				1,				1]
+};
+
+
+
+ function computeWB(){
+ 
+			var TakeOffMass = 0;
+			var LandingMass = 0;
+			var TakeOffMoment=0;
+			var LandingMoment=0;
+			var TakeOffCoG=0;
+			var LandingCoG=0;
+			
+			
+			if (Number(document.getElementById('InBoard').value)!=0 && (Number(document.getElementById('OutBoard').value)!=115)){
+				$('#InBoard').val(0);$('#InBoard').slider('refresh');
+				} ;
+			
+ 
+			for (var i = 0; i < Components.names.length; i += 1) {
+			
+				if (Components.mass[i]=='VAR'){ 
+					CompMass=Number(document.getElementById(Components.names[i]).value);
+				}
+				else {
+					CompMass=Components.mass[i];
+				}
+				
+				if (Components.active[i]=='VAR'){
+					CompActive=Number((document.getElementById(Components.names[i]).checked));
+				}
+				else {
+					CompActive=Components.active[i];
+				}
+				
+				console.log(CompActive)
+				
+				
+				CompLever=Components.lever[i];
+				CompLanding=Components.LDG[i];
+				
+				
+				TakeOffMass=TakeOffMass+CompMass*CompActive;
+				LandingMass=LandingMass+CompMass*CompLanding*CompActive;
+				
+				TakeOffMoment=TakeOffMoment+CompMass*CompActive*CompLever;
+				LandingMoment=LandingMoment+CompMass*CompActive*CompLanding*CompLever;
+				
+				TakeOffCoG=TakeOffMoment/TakeOffMass;
+				LandingCoG=LandingMoment/LandingMass;
+					
+			}
+
+			var SP_TO = document.getElementById('SP_TO');     
+			SP_TO.innerHTML = TakeOffCoG.toFixed(0) + ' mm';
+		  
+			var SP_LDG = document.getElementById('SP_LDG');     
+			SP_LDG.innerHTML = LandingCoG.toFixed(0) + ' mm';
+		  
+			var M_TO = document.getElementById('M_TO');     
+			M_TO.innerHTML =  TakeOffMass.toFixed(1) +' kg';
+		  
+			var M_LDG = document.getElementById('M_LDG');     
+			M_LDG.innerHTML = LandingMass.toFixed(1)+ ' kg';
+		  
+			var WL_TO = document.getElementById('WL_TO');     
+			WL_TO.innerHTML = (TakeOffMass/+16.9).toFixed(1) + ' kg/m2';
+		  
+			var WL_LDG = document.getElementById('WL_LDG');     
+			WL_LDG.innerHTML = (LandingMass/+16.9).toFixed(1) + ' kg/m2';
+		  
+		  
+		  
+		  
+		  
+ };
+ 
+ function setPilotWeight(name){
+		
+		if (name=='Brezn'){$('#PilotWeight').val(95);$('#PilotWeight').slider('refresh'); }
+		if (name=='Hacke'){$('#PilotWeight').val(65);$('#PilotWeight').slider('refresh'); }
+		if (name=='Ulle'){$('#PilotWeight').val(80);$('#PilotWeight').slider('refresh'); }
+		if (name=='Hulk'){$('#PilotWeight').val(95);$('#PilotWeight').slider('refresh'); }
+		
+		computeWB();
+ 
+ 
+ };
+ 
+ computeWB();
+
+ </script>
+
+
+
